@@ -110,6 +110,10 @@ switch ($_REQUEST['_op']) {
 	case 'setconfigcache':
 		include_once 'include/integrations/cache/settings.php';
 		break;
+	case 'getpaymententry':
+	case 'setpaymententry':
+		include_once 'include/integrations/paymentEntry/settings.php';
+		break;
 	default:
 		$smarty = new vtigerCRM_Smarty();
 		$titlemessage = getTranslatedString('Available Integrations', $currentModule);
@@ -191,6 +195,12 @@ switch ($_REQUEST['_op']) {
 				'title' => getTranslatedString('Cache Activation', 'Utilities'),
 				'desc' => getTranslatedString('Cache Activation_Desc', 'Utilities'),
 				'url' => 'index.php?action=integration&module=Utilities&_op=getconfigcache',
+			),
+			array(
+				'abbr' => 'PE',
+				'title' => getTranslatedString('Payment Entry Activation', 'Utilities'),
+				'desc' => getTranslatedString('Payment_Entry_Desc', 'Utilities'),
+				'url' => 'index.php?action=integration&module=Utilities&_op=getpaymententry',
 			),
 		);
 		if (file_exists('build/wsChanges/LoginSession.php')) {

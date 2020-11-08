@@ -123,5 +123,15 @@ $mod_strings = array(
 	'cache_port_required' => 'Cache service PORT is required',
 	'Cache Activation' => 'Cache layer activation',
 	'Cache Activation_Desc' => 'Make use of a cache layer implemented for three adapters: Memory, Redis, Memcached',
+	'Payment_Entry_Desc' => 'Payment Entry Points',
+	'Payment Entry Activation' => 'Payment Entry Activation',
+	'Select Payment Entry' => 'Select Payment Entry',
+	'stripe_Key' => 'Stripe API Key',
+	'Paypal Client ID' => 'Paypal client ID',
+	'Paypal Secret Key' => 'Paypal Secret Key',
+	'stripe_active' => 'Stripe Integration Active',
+	'paypal_active' => 'Paypal Integration Active',
+	'LBL_PaypalAPI_URL' => 'Paypal API URL',
+	'LBL_StripeAPI_URL' => 'Stripe API URL',
 );
 ?>
