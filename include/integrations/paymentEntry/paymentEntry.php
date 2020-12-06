@@ -58,7 +58,7 @@ class corebos_paymentEntry {
 		coreBOS_Settings::setSetting(self::KEY_ISACTIVE, $isactive);
 		coreBOS_Settings::setSetting(self::KEY_STRIPE_ISACTIVE, $stripeisActive);
 		coreBOS_Settings::setSetting(self::KEY_PAYPAL_ISACTIVE, $paypalisActive);
-		coreBOS_Settings::setSetting(self::KEY_STRIPE_API_KEY, $stripekey);
+		coreBOS_Settings::setSetting(self::KEY_STRIPE_API_KEY, $stripeKey);
 		coreBOS_Settings::setSetting(self::KEY_PAYPAL_CLIENT_ID, $paypalClientID);
 		coreBOS_Settings::setSetting(self::KEY_PAYPAL_SECRET_KEY, $paypalsecretKey);
 		coreBOS_Settings::setSetting(self::KEY_PAYPAL_API_URL, $paypalApiUrl);
