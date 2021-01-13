@@ -17,6 +17,7 @@
  *  Author    : JPL TSolucio, S. L.
  *************************************************************************************************/
 
+require_once 'vtlib/Vtiger/Net/Client.php';
 class corebos_paymentEntry {
 	private $isactive = 0;
 	private $stripeisActive = 0;
@@ -110,6 +111,86 @@ class corebos_paymentEntry {
 				return 0;
 				break;
 		}
+	}
+
+	/**
+	 * stripe customer functionalities
+	 */
+	public function createStripeCustomer($customerData = '') {
+		global $logbg;
+		if (self::checkDriverConfiguration('stripe')) {
+			$stripeApiUrl = coreBOS_Settings::getSetting(self::KEY_STRIPE_API_URL, 'https://api.stripe.com/v1');
+			$stripeApiUrl .= '/customers';
+			$client = new Vtiger_Net_Client($stripeApiUrl);
+			$client->setHeaders(array(
+				'Authorization' => 'Bearer '.coreBOS_Settings::getSetting(self::KEY_STRIPE_API_KEY, ''),
+				'Content-Type' => 'application/x-www-form-urlencoded',
+			));
+			try {
+				$response = $client->doPost($customerData);
+				return $response;
+			} catch (Exception $e) {
+				$logbg->debug('Failed, '. $e->getMessage());
+			}
+		}
+		return false;
+	}
+
+	public function retrieveStripeCustomer($customerId) {
+		if (self::checkDriverConfiguration('stripe')) {
+			$stripeApiUrl = coreBOS_Settings::getSetting(self::KEY_STRIPE_API_URL, 'https://api.stripe.com/v1');
+			$stripeApiUrl .= '/customers/'.$customerId;
+			$client = new Vtiger_Net_Client($stripeApiUrl);
+			$client->setHeaders(array(
+				'Authorization' => 'Bearer '.coreBOS_Settings::getSetting(self::KEY_STRIPE_API_KEY, ''),
+				'Content-Type' => 'application/x-www-form-urlencoded',
+			));
+			try {
+				$response = $client->doGet();
+				return $response;
+			} catch (Exception $e) {
+				$logbg->debug('Failed, '. $e->getMessage());
+			}
+		}
+		return false;
+	}
+
+	public function retrieveAllStripeCustomer() {
+		if (self::checkDriverConfiguration('stripe')) {
+			$stripeApiUrl = coreBOS_Settings::getSetting(self::KEY_STRIPE_API_URL, 'https://api.stripe.com/v1');
+			$stripeApiUrl .= '/customers';
+			$client = new Vtiger_Net_Client($stripeApiUrl);
+			$client->setHeaders(array(
+				'Authorization' => 'Bearer '.coreBOS_Settings::getSetting(self::KEY_STRIPE_API_KEY, ''),
+				'Content-Type' => 'application/x-www-form-urlencoded',
+			));
+			try {
+				$response = $client->doGet();
+				return $response;
+			} catch (Exception $e) {
+				$logbg->debug('Failed, '. $e->getMessage());
+			}
+		}
+		return false;
+	}
+
+	public function createStripeCustomerData($data) {
+		if (self::checkDriverConfiguration('stripe')) {
+			$stripeApiUrl = coreBOS_Settings::getSetting(self::KEY_STRIPE_API_URL, 'https://api.stripe.com/v1');
+			$stripeApiUrl .= '/customers/'.$customerId;
+			$client = new Vtiger_Net_Client($stripeApiUrl);
+			$client->setHeaders(array(
+				'Authorization' => 'Bearer '.coreBOS_Settings::getSetting(self::KEY_STRIPE_API_KEY, ''),
+				'Content-Type' => 'application/x-www-form-urlencoded',
+			));
+			try {
+				$response = $client->doPost($data);
+				return $response;
+			} catch (Exception $e) {
+				$logbg->debug('Failed, '. $e->getMessage());
+			}
+		}
+		return false;
 	}
 
 	public static function sanitizeDriverNameValue($driverName) {
